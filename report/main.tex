@@ -1,0 +1,93 @@
+\documentclass[journal]{IEEEtran}                                                          % if you need a4paper
+%\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4
+                                                         % paper
+\IEEEoverridecommandlockouts        % This command is only
+% needed if you want to
+                                    % use the \thanks command
+%\overrideIEEEmargins
+% See the \addtolength command later in the file to balance the column lengths
+% on the last page of the document
+% The following packages can be found on http:\\www.ctan.org
+\usepackage{graphics} % for pdf, bitmapped graphics files
+\usepackage{rotating} % rotate figures
+\usepackage{epsfig} % for postscript graphics files
+%\usepackage{mathptmx} % assumes new font selection scheme installed
+%\usepackage{times} % assumes new font selection scheme installed
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[spanish]{babel}
+\usepackage{cite}
+
+\usepackage{atbegshi} % erase first blank page
+\usepackage{hyperref}
+
+\AtBeginDocument{\AtBeginShipoutNext{\AtBeginShipoutDiscard}}
+
+\title{\LARGE \bf Proyecto: Minería de datos}
+
+%%%%%%%%%%%%%%%%%%%%%% AUTHORS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\author{Juan Pablo Echeagaray González, Emily Rebeca Méndez Cruz, Grace Aviance Silva Arostegui}% <-this % stops 
+\begin{document}
+
+    \thanks{Juan Pablo Echeagaray González, Emily Rebeca Méndez Cruz, Grace Aviance Silva Arostegui pertencen al Tec de Monterrey campus Monterrey, N.L. C.P. 64849, Mexico {\tt\small}}
+
+    \maketitle
+
+    \thispagestyle{empty}
+    \pagestyle{empty}
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{abstract}
+        Referencia perrona de este libro \cite{geron-2019}
+    \end{abstract}
+
+    \begin{IEEEkeywords} 
+    Data Science, Machine Learning, Data Analysis
+    \end{IEEEkeywords}
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \section{Introducción} \label{introduction}
+
+    \section{Créditos} \label{credits}
+       
+        \begin{itemize}
+            \item Juan Pablo Echeagaray González - A00830646
+            \item Emily Rebeca Méndez Cruz
+            \item Grace Aviance Silva Aróstegui
+        \end{itemize}
+
+    \section{Modelos de Machine Learning} \label{modelos} % [Juan Pablo]
+
+        \subsection{Árbol de decisión} \label{decision-tree}
+            \cite{sci-kit-learn-no-dateA}
+        \subsection{Support Vector Machine (SVM)} \label{svm}
+            % \cite{sci-kit-learn-svm}
+            Haciendo uso de Python y de la librería \emph{Folium} hemos visualizado una muestra de los últimos pedidos registrados en la base de datos, Fig; cada punto azul representa un cliente, y el punto negro dentro del mapa es donde se encuentra el CEDIS.
+
+        \subsection{Red Neuronal} \label{neural-network}
+            % uwu \cite{team-2022} \cite{team-2022}
+            Después de inspeccionar el mapa generado hemos notado que hay algunos puntos que parecen tener datos geográficos erróneos, descartar la entrega a estos clientes es algo inaceptable, así que una de las siguientes tareas en el proyecto será desarrollar un método de limpieza efectivo que ayude a mejorar la información geográfica que obtengamos de cada punto.
+
+        \subsection{Regresión Logística} \label{logistic}
+            % uwu \cite{sci-kit-learn-log}
+    \section{Resultados} \label{resultados}
+
+    \section{Conclusiones} \label{conclusiones}
+        
+        \subsection{Áreas de mejora} \label{improvements}
+
+        \subsection{Modelo seleccionado} \label{selected-model}
+
+    \section{Reflexiones} \label{thoughts}
+    
+    \appendices
+    
+    \section{Datos}
+        Los datos usados en este proyecto pueden descargarse \href{https://www.kaggle.com/code/ravaliraj/risk-classification-of-cervical-cancer}{aquí}
+
+    \section{Código}
+        El código desarrollado se encuentra en el siguiente \href{https://github.com/JuanEcheagaray75/cancer-clf}{repositorio}
+    \section{Evidencias de trabajo en equipo}
+    \bibliographystyle{IEEEtran}
+    \bibliography{references.bib}
+
+\end{document}

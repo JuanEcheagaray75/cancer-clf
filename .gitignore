@@ -1,1 +1,18 @@
+# Virtual environment
 venv
+
+# Latex related
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.idx
+*.ilg
+*.ind
+*.lof
+*.lot
+*.dvi
+*.cls
+*.bst
