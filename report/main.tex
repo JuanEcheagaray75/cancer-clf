@@ -55,20 +55,25 @@
             \item Grace Aviance Silva Aróstegui
         \end{itemize}
 
-    \section{Modelos de Machine Learning} \label{modelos} % [Juan Pablo]
+    \section{Modelos de Machine Learning} \label{modelos}
 
         \subsection{Árbol de decisión} \label{decision-tree}
             \cite{sci-kit-learn-no-dateA}
-        \subsection{Support Vector Machine (SVM)} \label{svm}
-            % \cite{sci-kit-learn-svm}
-            Haciendo uso de Python y de la librería \emph{Folium} hemos visualizado una muestra de los últimos pedidos registrados en la base de datos, Fig; cada punto azul representa un cliente, y el punto negro dentro del mapa es donde se encuentra el CEDIS.
+        \subsection{Support Vector Machine (SVM) Grace Aviance Silva Arostegui} \label{svm}
+            
+            Support vector machine  (SVM) es un algoritmo de aprendizaje supervisado que se utiliza en muchos problemas de clasificación y regresión, e incluso para la detección de valores atípicos \cite{geron-2019}. Este modelo de aprendizaje automático se basa en una separación de diferentes clases a través de un hiperplano en un espacio de dimensión superior \cite{deisenroth2020mathematics}.
+
+            Dado un conjunto de muestras (ejemplos de entrenamiento) se etiquetan clases y se entrena una SVM para construir un modelo que prediga la clase de una nueva muestra.
+
+            Para la base de datos que tenemos y el análisis que queremos llevar a cabo, en donde el enfoque es considerar en cada uno de los registros de las mujeres cual es el riesgo que tienen para desarrollar cáncer cervical. Dado que en la base de datos el rango de riesgos va de 0 a 4, tenemos así 5 clases de las cuales buscaríamos 5 hiperplanos que tengan el margen lo más ancho posible entre las clases, para así poder entregar lo mejor posible al algoritmo y hacer mejores clasificaciones futuras. Cabe mencionar que utilizamos un 80/20 de los datos para entrenamiento y prueba respectivamente.
 
         \subsection{Red Neuronal} \label{neural-network}
             % uwu \cite{team-2022} \cite{team-2022}
             Después de inspeccionar el mapa generado hemos notado que hay algunos puntos que parecen tener datos geográficos erróneos, descartar la entrega a estos clientes es algo inaceptable, así que una de las siguientes tareas en el proyecto será desarrollar un método de limpieza efectivo que ayude a mejorar la información geográfica que obtengamos de cada punto.
 
         \subsection{Regresión Logística} \label{logistic}
-            % uwu \cite{sci-kit-learn-log}
+            
+
     \section{Resultados} \label{resultados}
 
     \section{Conclusiones} \label{conclusiones}
