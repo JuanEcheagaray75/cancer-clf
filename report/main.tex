@@ -41,7 +41,7 @@
     \end{abstract}
 
     \begin{IEEEkeywords} 
-    Data Science, Machine Learning, Data Analysis
+    Data Science, Machine Learning, SVM, Decision Tree, ANN, Logistic Regression
     \end{IEEEkeywords}
 
     \section{Introducción} \label{introduction}
@@ -98,8 +98,8 @@
             El objetivo de este algoritmo es encontrar un hiperplano que separe de la mejor forma posible las clases diferentes de puntos de datos, lo cual implica que el hiperplano tenga un margen lo más amplio posible entre todas las clases, paralela al hiperplano y que no tenga puntos de datos interiores o si acaso permite un número pequeño de clasificaciones erróneas.
 
         \subsection{Red Neuronal: Juan Pablo Echeagaray González} \label{neural-network}
-            % uwu \cite{team-2022} \cite{team-2022}
-            Después de inspeccionar el mapa generado hemos notado que hay algunos puntos que parecen tener datos geográficos erróneos, descartar la entrega a estos clientes es algo inaceptable, así que una de las siguientes tareas en el proyecto será desarrollar un método de limpieza efectivo que ayude a mejorar la información geográfica que obtengamos de cada punto.
+           
+
 
         \subsection{Regresión Logística: Juan Pablo Echeagaray González} \label{logistic}
 
@@ -204,11 +204,19 @@
             \end{itemize}
             
         \subsection{Modelo seleccionado} \label{selected-model}
+            
+            El modelo que hemos seleccionado es la Red Neuronal, tuvo el mayor puntaje de \emph{Recall} y del puntaje $F1$. Creemos que el tiempo de entrenamiento del modelo podría ser drásticament reducido como lo hemos discutido en la sección \ref{improvements}. El coste de un tiempo extra de implementación así como una inversión monetaria en un equipo computacional con mayor poder se vuelven restricciones triviales cuando se trata de diagnosticar la presencia de cáncer en una persona.
 
     \section{Reflexiones} \label{thoughts}
 
         \subsection{Juan Pablo Echeagaray González}
+            
+            El trabajar con datos médicos será siempre una tarea complicada desde el ámbito ético. Desde la perspectiva de que se debe de respetar la privacidad de los individuos hasta el diseño de diferentes modelos predictivos que no se encuentren sesgados hacia un grupo poblacional en específico. Creo que el deber de un buen científico de datos es siempre garantizar que el uso de los datos que tenga disponibles no comprometan en ninguna manera la privacidad de las personas que se encuentren en la base de datos.
 
+            En caso de que el investigador disponga de alguna manera de identificar a los individuos de forma general, también será su deber el evitar que su algoritmo se sesgue para generar resultados favorables para cierto sector de la población.
+
+            Este proyecto reresentó un gran salto en mi aprendizaje de la Ciencia de Datos y el Machine Learning, al menos hasta este punto nunca había implementado ni estudiado tan a fondo una red neuronal; todavía me falta mucho por recorrer para generar modelos más eficaces, pero me alegra haber comenzado esta etapa de aprendizaje.
+            
         \subsection{Emily Rebeca Méndez Cruz}
 
         \subsection{Grace Aviance Silva Arostegui}
