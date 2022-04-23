@@ -72,7 +72,56 @@
             Después de inspeccionar el mapa generado hemos notado que hay algunos puntos que parecen tener datos geográficos erróneos, descartar la entrega a estos clientes es algo inaceptable, así que una de las siguientes tareas en el proyecto será desarrollar un método de limpieza efectivo que ayude a mejorar la información geográfica que obtengamos de cada punto.
 
         \subsection{Regresión Logística} \label{logistic}
+
+            La regresión logística es otro de los métodos de \emph{machine learning} usados comúnmente para la clasificación de datos. Este algoritmo se usa regularmente para estimar la posibilidad de que una instancia pertenezca a cierta clase; para el caso de clasificación binaria, si dicha probabilidad es mayor al 50\%, se clasifica a esa instancia como perteneciente a la clase positiva. Para generalizar este modelo a problemas de clasificación con $n$ clases $(n > 2)$, se calculan $n$ probabilidades de que la instancia pertenezca a la clase $i$, al final se escoge la que tenga el valor más alto \cite{geron-2019} \cite{sci-kit-learn-no-dateB}.
+
+            Al igual que con una regresión lineal, este algoritmo calcula una suma ponderada de los atributos de la instancia, más un término libre; pero lo que el modelo regresa es el resultado de aplicar la función logística a ese número:
+
+            \begin{equation}
+                \hat{p} = \sigma(\bf{x}^{T}\bf{\Theta})
+            \end{equation}
+
+            La función logística tiene un rango de 0 a 1 (por eso su uso como clasificador binario) a su vez se define como:
+
+            \begin{equation}
+                \sigma(t) = \frac{1}{1 + \exp(-t)}
+            \end{equation}
+
+            Una vez que se cuenta con la estimación de la probabilidad, la salida del modelo queda definida como:
+
+            \begin{equation}
+                \hat{y} = \begin{cases}
+                    0 & \hat{p} < 0.5 \\
+                    1 & \hat{p} \geq 0.5
+                \end{cases}
+            \end{equation}
+
+            Para entrenar nuestro modelo hemos de encontrar el vector $\bf{\Theta} \in \mathbb{R}^{27}$ (se tienen 27 atributos después de la limpieza de datos) que minimice la función \emph{log loss}, dicha función tiene la siguiente forma:
             
+            \begin{equation} \label{log-loss}
+                J(\bf{\Theta}) = - \frac{1}{m} \sum_{i=1}^{m} \left[y^{(i)} \log \left(\hat{p}^{(i)}\right) + (1 - y^{(i)}) \log \left(1 - \hat{p}^{(i)} \right) \right]
+            \end{equation}
+
+            El índice $m$ de la función \ref{log-loss} representa el número de instancias que tenemos en la base de datos; lo que hace esta función es calcular el promedio del error producido con el vector $\bf{\Theta}$. Al final de la fase de entrenamiento se desea haber encontrado el vector que minimice esta función
+
+            \subsubsection{Generalizando a n clases}
+
+                La regresión logística que clasifica instancias que podrían tener diferentes etiquetas es conocida como \emph{Regresión Logística Múltiple} o \emph{Regresión Softmax} (similar a la función descrita en la sección \ref{neural-network}). Primero se calcula una suma ponderada como en regresión logística para cada una de las posibles clases:
+
+                \begin{equation}
+                    s_k(\bf{x}) = \bf{x}^T \Theta^{(k)}
+                \end{equation}
+
+                Se usa este valor en la función sigmoide para obtener una probabilidad estimada:
+
+                \begin{equation}
+                    \hat{p}_k = \sigma(\bf{s}(\bf{x}))_k
+                \end{equation}
+
+                Y al final se escoge la clase con la probabilidad más alta:
+                \begin{equation}
+                    \hat{y} = \arg\max_k \sigma(s_k(\bf{x}))
+                \end{equation}
 
     \section{Resultados} \label{resultados}
 
