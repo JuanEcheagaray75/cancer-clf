@@ -37,7 +37,7 @@
     \pagestyle{empty}
 
     \begin{abstract}
-        Referencia perrona de este libro \cite{geron-2019}
+        Se realizó un proyecto de minería de datos en el que se probaron y documentaron 4 algoritmos de machine learning supervisados para predecir el nivel de riesgo de tener cáncer de cuello uterino. Se encontró que una red neuronal con 2 capas internas tuvo la mejor tasa de predicciones para los verdaderos positivos y el mejor puntaje F1, el inconveniente de la red neuronal fue su gran tiempo de entrenamiento.
     \end{abstract}
 
     \begin{IEEEkeywords} 
@@ -86,6 +86,18 @@
             Las reglas de partición ayudan a determinar puntos de ruptura para un conjunto en un nodo dado. La medida de selección de atributos es una heurística y esta proporciona un rango a cada característica, el atributo con la mejor puntuación se selecciona como atributo de división.
 
             Realizar el entrenamiento permite a nuestro modelo tener una base para su futura toma de decisiones, permitiendo obtener un aprendizaje inicial puesto que se le suministra información. Esto proporciona que el modelo pueda plantear correlaciones entre los datos del entrenamiento y los que tiene actualmente guiándolo a la opción correcta.
+
+            \subsubsection{Implementación}
+
+                Para la implementación se hizo uso de la clase DecisionTreeClassifier de la librería de Sciki Learn, ya que con esta función se realiza el entrenamiento del modelo. Nuestros argumentos son:
+                \begin{enumerate}
+                    \item X\_train(pd.DataFrame): Es el arreglo de datos con las características
+                    \item y\_train(pd.Series): Arreglo con las etiquetas
+                    \item max\_depth: Este da a entender la profundidad máxima del árbol, este se mantiene bajo para evitar el sobreajuste
+                    \item random\_state: Controla la aleatoriedad del estimador, teniendo de valor predeterminado 0
+                \end{enumerate}
+                
+                Se escogió una profundidad máxima de 10 después de hacer varios modelados con diferentes profundidades.
         
         \subsection{Support Vector Machine (SVM) Grace Aviance Silva Arostegui} \label{svm}
             
@@ -96,6 +108,12 @@
             Para la base de datos que tenemos y el análisis que queremos llevar a cabo, en donde el enfoque es considerar en cada uno de los registros de las mujeres cual es el riesgo que tienen para desarrollar cáncer cervical. Dado que en la base de datos el rango de riesgos va de 0 a 4, tenemos así 5 clases de las cuales buscaríamos 5 hiperplanos que tengan el margen lo más ancho posible entre las clases, para así poder entregar lo mejor posible al algoritmo y hacer mejores clasificaciones futuras. Cabe mencionar que utilizamos un 80/20 de los datos para entrenamiento y prueba respectivamente.
 
             El objetivo de este algoritmo es encontrar un hiperplano que separe de la mejor forma posible las clases diferentes de puntos de datos, lo cual implica que el hiperplano tenga un margen lo más amplio posible entre todas las clases, paralela al hiperplano y que no tenga puntos de datos interiores o si acaso permite un número pequeño de clasificaciones erróneas.
+
+            \subsubsection{Implementación}
+
+                De la librería de machine learning scikit-learn para este algoritmo, importamos SVC. Definimos una función que crea y entrena un svm kernel. Creamos una variable svm la cual ejecuta la función SVM de la librería, la cual recibe tres argumentos; el tipo de kernel que en este caso fue rbf, que la clase fuese balanceada, y el random state que por default es cero.
+
+                Entrenamos la variable con la función fit. Esta variable entrenada es indispensable ya que es la que se retorna al ejecutar el algoritmo que recibe como valores de entrada: X\_train y y\_train
 
         \subsection{Red Neuronal: Juan Pablo Echeagaray González} \label{neural-network}
            
@@ -125,17 +143,17 @@
 
             La naturaleza de este proceso de entrenamiento es lo que vuelve lento el proceso de entrenamiento de una red neuronal, pero también, es lo que le brinda la capacidad de ajustarse a relaciones no lineales presentes en la base de datos.
 
-            \subsubsection{Arquitectura usada}
+            \subsubsection{Implementación}
 
-            Haciendo uso de la librerías \emph{Keras} y \emph{TensorFlow} hemos propuesto el siguiente diseño:
-            \begin{enumerate}
-                \item Capa de entrada con 27 neuronas para los atributos que tiene la base de datos después de su limpieza. Funciónd de activación \emph{relu}
-                \item Capa de 20 neuronas. Función de activación \emph{relu}
-                \item Capa de 20 neuronas. Función de activación \emph{relu}
-                \item Capa de salida con 5 neuronas para cada uno de los posibles niveles de riesgo. Función de activación \emph{softmax}
-            \end{enumerate}
+                Haciendo uso de la librerías \emph{Keras} y \emph{TensorFlow} hemos propuesto el siguiente diseño:
+                \begin{enumerate}
+                    \item Capa de entrada con 27 neuronas para los atributos que tiene la base de datos después de su limpieza. Funciónd de activación \emph{relu}
+                    \item Capa de 20 neuronas. Función de activación \emph{relu}
+                    \item Capa de 20 neuronas. Función de activación \emph{relu}
+                    \item Capa de salida con 5 neuronas para cada uno de los posibles niveles de riesgo. Función de activación \emph{softmax}
+                \end{enumerate}
 
-            La red tiene un batch de 32 observaciones y fue entrenado por 50 epochs.
+                La red tiene un batch de 32 observaciones y fue entrenado por 50 epochs.
 
         \subsection{Regresión Logística: Juan Pablo Echeagaray González} \label{logistic}
 
@@ -189,7 +207,9 @@
                     \hat{y} = \arg\max_k \sigma(s_k(\bf{x}))
                 \end{equation}
             
-            Para nuestro caso de estudio hemos optado por utilizar la librería \emph{scikit-learn} con su regresor logístico documentado en \cite{sci-kit-learn-no-dateB}. Los datos de entrenamiento del modelo representarán un 80\% de la base de datos, y la variable que buscaremos predecir será el nivel de riesgo que tiene un individuo dados los 27 atributos que tenemos. Una comparativa de este modelo contra los demás se realizará en la sección \ref{resultados}.
+            \subsubsection{Implementación}
+
+                Para nuestro caso de estudio hemos optado por utilizar la librería \emph{scikit-learn} con su regresor logístico documentado en \cite{sci-kit-learn-no-dateB}. Los datos de entrenamiento del modelo representarán un 80\% de la base de datos, y la variable que buscaremos predecir será el nivel de riesgo que tiene un individuo dados los 27 atributos que tenemos. Una comparativa de este modelo contra los demás se realizará en la sección \ref{resultados}.
 
     \section{Resultados} \label{resultados}
         
@@ -256,7 +276,7 @@
             Este proyecto reresentó un gran salto en mi aprendizaje de la Ciencia de Datos y el Machine Learning, al menos hasta este punto nunca había implementado ni estudiado tan a fondo una red neuronal; todavía me falta mucho por recorrer para generar modelos más eficaces, pero me alegra haber comenzado esta etapa de aprendizaje.
 
         \subsection{Emily Rebeca Méndez Cruz}
-        
+
             Gracias a esta actividad puedo darme cuenta de cuán importante es tener una buena base de datos para la predicción de alguna enfermedad, ya que se debe de dar la predicción con la mayor precisión posible para este tipo de situaciones. Debido a que estamos trabajando con personas, tenemos la vida de personas en nuestras manos, por lo que es una gran responsabilidad para la gente que trabaja en esta área.
 
             El uso de la tecnología en la medicina ha abierto una gran panorama de posibilidades tanto para el tratamiento de un paciente o para la predicción de un posible caso. El uso de estos modelos nos permiten identificar pacientes de alto riesgo de alguna enfermedad, permitiendo identificar y anticiparse a las necesidades de los pacientes. También se puede predecir la evolución de los pacientes debido a que con esta información se pueden tomar las medidas necesarias para evitar una propagación de la enfermedad.
@@ -275,10 +295,14 @@
 
         Los datos usados en este proyecto pueden descargarse \href{https://www.kaggle.com/code/ravaliraj/risk-classification-of-cervical-cancer}{aquí}.
 
-    \section{Código}
+    \section{Código}\label{repo}
 
         El código desarrollado se encuentra en el siguiente \href{https://github.com/JuanEcheagaray75/cancer-clf}{repositorio}.
     \section{Evidencias de trabajo en equipo}
+        
+        En este \href{https://docs.google.com/document/d/1febGMKH0Z8mdPzhVf\_FTBrOR3ENYA2iGw5Lfeg8XTjk/edit?usp=sharing}{link} se puede ver un historial del borrador usado para generar este reporte, ahí se pueden ver las contribuciones hechas por cada integrante al producto final. Las aportaciones de Juan Pablo Echeagaray González pueden ser vistas desde el historial de commits en el repositorio proporcionado en la sección \ref{repo}.
+
+
 
     \bibliographystyle{IEEEtran}
     \bibliography{references.bib}
