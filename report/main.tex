@@ -50,15 +50,36 @@
     \section{Créditos} \label{credits}
        
         \begin{itemize}
-            \item Juan Pablo Echeagaray González - A00830646
-            \item Emily Rebeca Méndez Cruz
-            \item Grace Aviance Silva Aróstegui
+            \item Juan Pablo Echeagaray González - Programador / Data Scientist
+            \item Emily Rebeca Méndez Cruz - Programador / Data Scientist
+            \item Grace Aviance Silva Aróstegui - Programador / Data Scientist
         \end{itemize}
 
     \section{Modelos de Machine Learning} \label{modelos}
 
-        \subsection{Árbol de decisión} \label{decision-tree}
-            \cite{sci-kit-learn-no-dateA}
+        \subsection{Árbol de decisión: Emily Rebeca Méndez Cruz} \label{decision-tree}
+
+            Los árboles de decisión son un método de aprendizaje supervisado utilizado para la clasificación y la regresión. Este método tiene como objetivo crear un modelo que prediga el valor de una variable de destino mediante el aprendizaje de reglas de decisión simples deducidas de las características de los datos proporcionados. Su estructura puede ser analizada para obtener más información acerca de la relación entre las características y el objeto a predecir.
+
+            En esta representación un nodo interno representa un atributo o característica, la rama corresponde una regla de decisión y cada nodo u hoja representa el resultado. El nodo raíz es el nodo superior de un árbol de decisión.
+
+            Al momento de crear un árbol, las observaciones de entrenamiento quedan agrupadas en los nodos terminales. Para predecir una nueva observación, se recorre el árbol en función del valor de sus predictores hasta llegar a uno de los nodos terminales.
+
+            La metodología de un árbol de decisión es:
+            \begin{itemize}
+                \item Seleccionar el mejor atributo empleando una medida de selección de características o atributos
+                \item Hacer del atributo seleccionado un nodo de decisión y dividir el conjunto de datos en subconjuntos más pequeños
+                \item Comenzar la selección del árbol repitiendo el proceso en cada atributo hasta que una de estas condiciones se cumpla: \begin{itemize}
+                    \item Todas las variables pertenecen al mismo valor de atributo
+                    \item Se han acabado los atributos
+                    \item No hay más casos
+                \end{itemize}
+            \end{itemize}
+
+            Las reglas de partición ayudan a determinar puntos de ruptura para un conjunto en un nodo dado. La medida de selección de atributos es una heurística y esta proporciona un rango a cada característica, el atributo con la mejor puntuación se selecciona como atributo de división.
+
+            Realizar el entrenamiento permite a nuestro modelo tener una base para su futura toma de decisiones, permitiendo obtener un aprendizaje inicial puesto que se le suministra información. Esto proporciona que el modelo pueda plantear correlaciones entre los datos del entrenamiento y los que tiene actualmente guiándolo a la opción correcta.
+        
         \subsection{Support Vector Machine (SVM) Grace Aviance Silva Arostegui} \label{svm}
             
             Support vector machine  (SVM) es un algoritmo de aprendizaje supervisado que se utiliza en muchos problemas de clasificación y regresión, e incluso para la detección de valores atípicos \cite{geron-2019}. Este modelo de aprendizaje automático se basa en una separación de diferentes clases a través de un hiperplano en un espacio de dimensión superior \cite{deisenroth2020mathematics}.
@@ -67,11 +88,13 @@
 
             Para la base de datos que tenemos y el análisis que queremos llevar a cabo, en donde el enfoque es considerar en cada uno de los registros de las mujeres cual es el riesgo que tienen para desarrollar cáncer cervical. Dado que en la base de datos el rango de riesgos va de 0 a 4, tenemos así 5 clases de las cuales buscaríamos 5 hiperplanos que tengan el margen lo más ancho posible entre las clases, para así poder entregar lo mejor posible al algoritmo y hacer mejores clasificaciones futuras. Cabe mencionar que utilizamos un 80/20 de los datos para entrenamiento y prueba respectivamente.
 
-        \subsection{Red Neuronal} \label{neural-network}
+            El objetivo de este algoritmo es encontrar un hiperplano que separe de la mejor forma posible las clases diferentes de puntos de datos, lo cual implica que el hiperplano tenga un margen lo más amplio posible entre todas las clases, paralela al hiperplano y que no tenga puntos de datos interiores o si acaso permite un número pequeño de clasificaciones erróneas.
+
+        \subsection{Red Neuronal: Juan Pablo Echeagaray González} \label{neural-network}
             % uwu \cite{team-2022} \cite{team-2022}
             Después de inspeccionar el mapa generado hemos notado que hay algunos puntos que parecen tener datos geográficos erróneos, descartar la entrega a estos clientes es algo inaceptable, así que una de las siguientes tareas en el proyecto será desarrollar un método de limpieza efectivo que ayude a mejorar la información geográfica que obtengamos de cada punto.
 
-        \subsection{Regresión Logística} \label{logistic}
+        \subsection{Regresión Logística: Juan Pablo Echeagaray González} \label{logistic}
 
             La regresión logística es otro de los métodos de \emph{machine learning} usados comúnmente para la clasificación de datos. Este algoritmo se usa regularmente para estimar la posibilidad de que una instancia pertenezca a cierta clase; para el caso de clasificación binaria, si dicha probabilidad es mayor al 50\%, se clasifica a esa instancia como perteneciente a la clase positiva. Para generalizar este modelo a problemas de clasificación con $n$ clases $(n > 2)$, se calculan $n$ probabilidades de que la instancia pertenezca a la clase $i$, al final se escoge la que tenga el valor más alto \cite{geron-2019} \cite{sci-kit-learn-no-dateB}.
 
@@ -122,6 +145,8 @@
                 \begin{equation}
                     \hat{y} = \arg\max_k \sigma(s_k(\bf{x}))
                 \end{equation}
+            
+            Para nuestro caso de estudio hemos optado por utilizar la librería \emph{scikit-learn} con su regresor logístico documentado en \cite{sci-kit-learn-no-dateB}. Los datos de entrenamiento del modelo representarán un 80\% de la base de datos, y la variable que buscaremos predecir será el nivel de riesgo que tiene un individuo dados los 27 atributos que tenemos. Una comparativa de este modelo contra los demás se realizará en la sección \ref{resultados}.
 
     \section{Resultados} \label{resultados}
 
