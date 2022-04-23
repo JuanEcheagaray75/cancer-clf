@@ -35,7 +35,7 @@
 
     \thispagestyle{empty}
     \pagestyle{empty}
-    
+
     \begin{abstract}
         Referencia perrona de este libro \cite{geron-2019}
     \end{abstract}
@@ -89,7 +89,7 @@
         
         \subsection{Support Vector Machine (SVM) Grace Aviance Silva Arostegui} \label{svm}
             
-            Support vector machine  (SVM) es un algoritmo de aprendizaje supervisado que se utiliza en muchos problemas de clasificación y regresión, e incluso para la detección de valores atípicos \cite{geron-2019}. Este modelo de aprendizaje automático se basa en una separación de diferentes clases a través de un hiperplano en un espacio de dimensión superior \cite{deisenroth2020mathematics}.
+            Support vector machine  (SVM) es un algoritmo de aprendizaje supervisado que se utiliza en muchos problemas de clasificación y regresión, e incluso para la detección de valores atípicos \cite{geron-2019}. Este modelo de aprendizaje automático se basa en una separación de diferentes clases a través de un hiperplano en un espacio de dimensión superior \cite{deisenroth2020mathematics} \cite{mathworks-2022}.
 
             Dado un conjunto de muestras (ejemplos de entrenamiento) se etiquetan clases y se entrena una SVM para construir un modelo que prediga la clase de una nueva muestra.
 
@@ -156,15 +156,64 @@
             Para nuestro caso de estudio hemos optado por utilizar la librería \emph{scikit-learn} con su regresor logístico documentado en \cite{sci-kit-learn-no-dateB}. Los datos de entrenamiento del modelo representarán un 80\% de la base de datos, y la variable que buscaremos predecir será el nivel de riesgo que tiene un individuo dados los 27 atributos que tenemos. Una comparativa de este modelo contra los demás se realizará en la sección \ref{resultados}.
 
     \section{Resultados} \label{resultados}
+        
+        Para la comparación de los modelos hemos escogido medir el \emph{recall}, el puntaje $F1$ y el tiempo de entrenamiento de los modelos. Hemos escogido estas métricas porque queremos diseñar modelos que predizcan con alta precisión los casos positivos (\emph{recall}) y queremos que en general tenga un buen desempeño de precisión y predicción de casos positivos; mientras más cercanos a 1 sean estos valores mejor; el tiempo de entrenamiento es una métrica importante a considerar también, considerar los recursos computacionales que requiere el entrenamiento de un algoritmo en especial podría definir que este sea factible o no. Los puntajes obtenidos fueron (redondeando a 3 decimales):
+        
+        \begin{center}
+            \begin{tabular}{ |c|c|c|c| }
+                \hline
+                Modelo & Recall & F1 & Tiempo (s) \\
+                \hline
+                Árbol de decisión & 0.793 & 0.788 & 0.024 \\
+                \hline
+                SVM & 0.671 & 0.659 & 0.391 \\
+                \hline
+                Red Neuronal & 0.826 & 0.824 & 34.836 \\
+                \hline
+                Regresión logística & 0.465 & 0.459 & 0.838 \\
+                \hline
+            \end{tabular}
+        \end{center}
+
+        Un gráfico que resume los resultados de nuestro estudio se puede ver en la figura \ref{comparison}
+
+        \begin{figure}[!htb]
+            \centering
+            \includegraphics[scale=0.25]{../report/img/comparison-results.pdf}
+            \caption{Métricas de los modelos}
+            \label{comparison}
+        \end{figure}
+
+        Como vemos en \ref{comparison}, solamente el árbol de decisión, el support vector machine y la red neuronal tienen puntajes aceptables en el \emph{recall} y el puntaje $F1$. La regresión logística tuvo un desempeño mediocre, que al menos en nuestro proyecto lo remueve de la lista de posibles métodos a escoger.
+
+        Solamente considerando estas métricas, la red neuronal tiene el mejor desempeño de los 4 modelos restantes, pero también hemos de notar que su tiempo de entrenamiento es al menos 3 ordenes de magnitud mayor.
 
     \section{Conclusiones} \label{conclusiones}
         
         \subsection{Áreas de mejora} \label{improvements}
 
+            Si bien hemos encontrado modelos que tienen un desempeño aceptable para nuestro caso de estudio, el equipo reconoce que todavía hay áreas de oportunidad para mejorar el desempeño de los modelos entrenados, entre ellas se encuentran:
+                
+            \begin{itemize}
+                \item Uso de validación cruzada para estimar el desempeño promedio de los modelos, así como encontrar los hiper-parámetros que los maximicen (donde aplique). Para el caso de la red neuronal, realizar más pruebas para encontrar la arquitectura adecuada que maximice sus puntajes.
+                \item Prueba de diferentes técnicas de tratamiento de clases desbalanceadas. En nuestra aproximación se optó por usar el algoritmo KNN para la creación de datos artificiales que compensaran dicho desbalance, pero también existe la opción de añadir parámetros de regularización a los modelos usados que beneficien la predicción de las clases con un menor número de instancias
+                \item Tiempo de entrenamiento de la Red Neuronal \begin{itemize}
+                    \item Realizar una comparativa del tiempo de entrenamiento de la red neuronal en diferentes sistemas operativos. Al momento de la realización de nuestro estudio dispusimos de una máquina corriendo \emph{Windows 10} pero con la opción de usar una máquina virtual ligera corriendo una distribición de Linux por medio de \emph{WSL2}. El usar una distribución de Linux puede reducir drásticamente el tiempo de entrenamiento de una red neuronal dado que los drivers de las tarjetas gráficas usadas por los algoritmos que las entrenan suelen tener una mejor optimización para estos sistemas operativos.
+                    \item Aunado a esto, existe la posibilidad de usar tarjetas gráficas para acelerar este proceso aún más, por motivos de recursos, esta área de oportunidad quedaría completamente fuera de nuestro alcance, pero está demostrado que el uso de estas tarjetas mejora el tiempo de entrenamiento de las redes neuronales \cite{likhith-k-2019}.
+                \end{itemize}
+            \end{itemize}
+            
         \subsection{Modelo seleccionado} \label{selected-model}
 
     \section{Reflexiones} \label{thoughts}
-    
+
+        \subsection{Juan Pablo Echeagaray González}
+
+        \subsection{Emily Rebeca Méndez Cruz}
+
+        \subsection{Grace Aviance Silva Arostegui}
+
+
     \appendices
     
     \section{Datos} \label{data}
