@@ -35,7 +35,7 @@
 
     \thispagestyle{empty}
     \pagestyle{empty}
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
     \begin{abstract}
         Referencia perrona de este libro \cite{geron-2019}
     \end{abstract}
@@ -44,9 +44,16 @@
     Data Science, Machine Learning, Data Analysis
     \end{IEEEkeywords}
 
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \section{Introducción} \label{introduction}
 
+        La base de datos fue recuperada de Kaggle (la liga de acceso se encuentra en la sección \ref{data}), para nuestro caso de estudio hemos escogido una base de datos enfocada en la clasificación de riesgo para el cáncer cervical.
+
+        La información que contiene son  857 registros de mujeres en las que se les identifica datos, características y/o enfermedades significativas para incrementar el riesgo para contraer cáncer cervical. Entre ellos: la edad, el número de parejas sexuales, la edad de la primera relación sexual, número de embarazos, si fuma o no, el número de años fumando, el número de cajetillas consumidas por año, si consumen o no anticonceptivos, el número de años consumiendo anticonceptivos, si usan o no DIU, el número de años usando DIU, si tienen ETS o no, el número de ETS que tienen, si tienen o no los siguientes tipos de ETS (condilomatosis, condilomatosis cervical, condilomatosis vaginal, condilomatosis vulvo-perineal, sífilis, enfermedad inflamatoria pélvica, herpes, molusco contagioso, AIDs, VIH, hepatitis B, HPV, número de diagnósticos, tiempo desde el primer diagnóstico, tiempo del último diagnóstico), cáncer, CIN, HPV, Hinselmann, Schiller, citología, y biopsia.
+
+        Las columnas de la base de datos Hinselmann, Schiller, citología, y biopsia, son variables binarias que representan diferentes estudios que tratan de encontrar cáncer en el cuello utirino de las pacientes. Dada la documentación de la base de datos, no nos fue posible determinar cuál de estos 4 estudios es el más fiable para la determinación de la presencia de un cáncer, por lo que hemos optado por la creación de una nueva variable se define como la suma de los valores que toman los estudios en la base de datos, esto resulta en una variable con 5 posibles valores, un mínimo de 0 representando un riesgo nulo o bajo de tener cáncer, y un valor máximo de 4 representando el mayor riesgo de tenerlo.
+
+        El objetivo de nuestro proyecto es diseñar un modelo de \emph{Machine Learning} que logre predecir con alta precisión la probabilidad de que un indivuo tenga un cierto nivel de riesgo de tener cáncer.
+    
     \section{Créditos} \label{credits}
        
         \begin{itemize}
@@ -160,12 +167,15 @@
     
     \appendices
     
-    \section{Datos}
+    \section{Datos} \label{data}
+
         Los datos usados en este proyecto pueden descargarse \href{https://www.kaggle.com/code/ravaliraj/risk-classification-of-cervical-cancer}{aquí}
 
     \section{Código}
+
         El código desarrollado se encuentra en el siguiente \href{https://github.com/JuanEcheagaray75/cancer-clf}{repositorio}
     \section{Evidencias de trabajo en equipo}
+
     \bibliographystyle{IEEEtran}
     \bibliography{references.bib}
 
