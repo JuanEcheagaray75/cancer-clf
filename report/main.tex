@@ -99,7 +99,43 @@
 
         \subsection{Red Neuronal: Juan Pablo Echeagaray González} \label{neural-network}
            
+            Las redes neuronales artificiales están inspiradas en las redes neuronales que encontramos en los seres vivos, la relación con estas es que decimos que estas redes artificiales están constantemente aprendiendo y modificando su conocimiento y entendimiento de un proceso, para nuestro caso de aplicación, una red neuronal artificial aprende las relaciones complejas que pueden haber entre un conjunto de variables predictoras y una variable objetivo a predecir \cite{geron-2019}.
 
+            De forma básica, una red neuronal consiste de:
+            \begin{enumerate}
+                \item Capa de entrada
+                \item Capas internas (o escondidas)
+                \item Capa de salida
+            \end{enumerate}
+
+            \begin{figure}[!htb]
+                \centering
+                \includegraphics[scale=0.3]{../report/img/nn-diagram.png}
+                \caption{Estructura básica de una red neuronal}
+                \label{nn-diagram}
+            \end{figure}
+
+            Cada una de estas capas está compuesta de un número de neuronas que se conectan entre sí \ref{nn-diagram}. Si estamos hablando de un proceso de regresión o de clasificación binaria, la capa de salida solamente necesita una neurona de salida, mientras que si hablamos de un proceso de clasificación con múltiples clases, se necesitará una neurona para cada posible clase.
+
+            Cada una de las neuronas en la red encapsulan una \emph{función de activación}, que recibe una suma ponderada de los valores arrojados por la capa anterior más un término libre. Hay diversas funciones de activación, pero las más usadas suelen ser \emph{relu} y \emph{softmax}, esta última se usa para problemas con múltiples clases \cite{geron-2019}.
+
+            La determinación de los coeficientes usados para realizar la suma ponderada es la tarea más importante de la red neuronal, para encontrar el conjunto que optimice el desempeño del modelo se hace uso de la técnica \emph{backpropagation}, en la que en pocas palabras, la red neuronal puede darse información a sí misma de qué tan mala fue una predicción para después determinar qué coeficiente fue el que causó el mayor error.
+
+            El número de veces que se actualizarán dichos coeficientes está primeramente en función del \emph{batch} que se le proporcione a la red. Este valor representa cuantas instancias se le pasarán a la red antes de realizar el backpropagation. Por lo general este número suele ser menor que el número de observaciones presentes en la base de datos. Una vez que la red ha hecho el número de corridas necesarias para cubrir el conjunto de entrenamiento, se dice que ha ocurrido un \emph{epoch}, esta cantidad representa el número de veces que el proceso anterior será repetido.
+
+            La naturaleza de este proceso de entrenamiento es lo que vuelve lento el proceso de entrenamiento de una red neuronal, pero también, es lo que le brinda la capacidad de ajustarse a relaciones no lineales presentes en la base de datos.
+
+            \subsubsection{Arquitectura usada}
+
+            Haciendo uso de la librerías \emph{Keras} y \emph{TensorFlow} hemos propuesto el siguiente diseño:
+            \begin{enumerate}
+                \item Capa de entrada con 27 neuronas para los atributos que tiene la base de datos después de su limpieza. Funciónd de activación \emph{relu}
+                \item Capa de 20 neuronas. Función de activación \emph{relu}
+                \item Capa de 20 neuronas. Función de activación \emph{relu}
+                \item Capa de salida con 5 neuronas para cada uno de los posibles niveles de riesgo. Función de activación \emph{softmax}
+            \end{enumerate}
+
+            La red tiene un batch de 32 observaciones y fue entrenado por 50 epochs.
 
         \subsection{Regresión Logística: Juan Pablo Echeagaray González} \label{logistic}
 
@@ -157,7 +193,9 @@
 
     \section{Resultados} \label{resultados}
         
-        Para la comparación de los modelos hemos escogido medir el \emph{recall}, el puntaje $F1$ y el tiempo de entrenamiento de los modelos. Hemos escogido estas métricas porque queremos diseñar modelos que predizcan con alta precisión los casos positivos (\emph{recall}) y queremos que en general tenga un buen desempeño de precisión y predicción de casos positivos; mientras más cercanos a 1 sean estos valores mejor; el tiempo de entrenamiento es una métrica importante a considerar también, considerar los recursos computacionales que requiere el entrenamiento de un algoritmo en especial podría definir que este sea factible o no. Los puntajes obtenidos fueron (redondeando a 3 decimales):
+        Para la comparación de los modelos hemos escogido medir el \emph{recall}, el puntaje $F1$ y el tiempo de entrenamiento de los modelos. Hemos escogido estas métricas porque queremos diseñar modelos que predizcan con alta precisión los casos positivos (\emph{recall}) y queremos que en general tenga un buen desempeño de precisión y predicción de casos positivos; mientras más cercanos a 1 sean estos valores mejor; el tiempo de entrenamiento es una métrica importante a considerar también, considerar los recursos computacionales que requiere el entrenamiento de un algoritmo en especial podría definir que este sea factible o no. Para estimar el tiempo de entrenamiento de cada modelo hemos corrido una simulación en la que cada modelo fue entrenado 20 veces, al final hemos reportado el tiempo de entrenamiento promedio.
+        
+        Los puntajes obtenidos fueron (redondeando a 3 decimales):
         
         \begin{center}
             \begin{tabular}{ |c|c|c|c| }
@@ -216,12 +254,15 @@
             En caso de que el investigador disponga de alguna manera de identificar a los individuos de forma general, también será su deber el evitar que su algoritmo se sesgue para generar resultados favorables para cierto sector de la población.
 
             Este proyecto reresentó un gran salto en mi aprendizaje de la Ciencia de Datos y el Machine Learning, al menos hasta este punto nunca había implementado ni estudiado tan a fondo una red neuronal; todavía me falta mucho por recorrer para generar modelos más eficaces, pero me alegra haber comenzado esta etapa de aprendizaje.
-            
+
         \subsection{Emily Rebeca Méndez Cruz}
 
         \subsection{Grace Aviance Silva Arostegui}
 
+            Sin duda, el desarrollo de la medicina junto con la tecnología es una gran apuesta para un acercamiento a una mejor calidad de vida e incluso para la aspirada sociedad 5.0 cuya característica principal es que los avances tecnológicos contribuyan significativamente a una mejora de la sociedad en al que se enfoca todo su esfuerzo en beneficiar al ser humano. Reflexiono la importancia de las implicaciones profesionales que conlleva el desarrollo y análisis médicos por parte de profesionistas que no son médicos; en toda profesión hay responsabilidad en las manos de los proyectos que se llevan a cabo, más el trabajar con datos médicos es un tema muy delicado ya que la salud es lo más importante y frágil para las personas. Estas implicaciones profesionales van desde lo que es el llenado de estas bases de datos, porque de no ser bien registradas o medidas meticulosamente, pueden afectar los análisis, resultados, recomendaciones y predicciones para los pacientes y así dar malos pronósticos o recetas médicas, e inclusive afirmar que ciertos pacientes no tengan probabilidad o se encuentren en riesgo de desarrollar alguna enfermedad dando un falso negativo, y esto refleja directamente el tema ético y de negligencias médicas. Es de suma importancia que todo el proceso sea muy minucioso y ordenado para poder sacar el mejor provecho del desarrollo de la tecnología y sus áreas multidisciplinares que se relacionen con las aplicaciones médicas.
 
+            Me agradó este proyecto ya que fue un buen primer acercamiento de aplicación médica a Data Science, el poder comparar distintos algoritmos de machine learning para poder clasificar registros y predicciones de riesgo para desarrollar cáncer. Me parece de gran valor el poder darle uso al área médica los conocimientos de mi carrera, y el hecho de que pueden tener un impacto positivo en la sociedad.
+        
     \appendices
     
     \section{Datos} \label{data}
