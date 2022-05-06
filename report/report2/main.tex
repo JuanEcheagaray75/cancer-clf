@@ -1,0 +1,131 @@
+\documentclass[journal]{IEEEtran}
+%\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4
+                                                         % paper
+\IEEEoverridecommandlockouts        % This command is only
+% needed if you want to
+                                    % use the \thanks command
+%\overrideIEEEmargins
+% See the \addtolength command later in the file to balance the column lengths
+% on the last page of the document
+% The following packages can be found on http:\\www.ctan.org
+\usepackage{graphics} % for pdf, bitmapped graphics files
+\usepackage{rotating} % rotate figures
+\usepackage{epsfig} % for postscript graphics files
+%\usepackage{mathptmx} % assumes new font selection scheme installed
+%\usepackage{times} % assumes new font selection scheme installed
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[spanish]{babel}
+\usepackage{cite}
+
+\usepackage{atbegshi} % erase first blank page
+\usepackage{hyperref}
+
+\AtBeginDocument{\AtBeginShipoutNext{\AtBeginShipoutDiscard}}
+
+\title{\LARGE \bf Proyecto de Aprendizaje por Refuerzo}
+
+%%%%%%%%%%%%%%%%%%%%%% AUTHORS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\author{Juan Pablo Echeagaray González, Emily Rebeca Méndez Cruz, Grace Aviance Silva Arostegui}% <-this % stops 
+\begin{document}
+
+    \thanks{Juan Pablo Echeagaray González, Emily Rebeca Méndez Cruz, Grace Aviance Silva Arostegui pertencen al Tec de Monterrey campus Monterrey, N.L. C.P. 64849, Mexico {\tt\small}}
+
+    \maketitle
+
+    \thispagestyle{empty}
+    \pagestyle{empty}
+    
+    \begin{abstract}
+        Referencia perrona de este libro \cite{russell2002artificial}
+    \end{abstract}
+
+    \begin{IEEEkeywords} 
+    Data Science, Machine Learning, Reinforcement Learning
+    \end{IEEEkeywords}
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \section{Introducción} \label{introduction}
+
+        La base de datos fue recuperada de Kaggle (la liga de acceso se encuentra en el apéndice \ref{data}), para nuestro caso de estudio hemos escogido una base de datos enfocada en la clasificación de riesgo para el cáncer cervical.
+
+        La información que contiene son  857 registros de mujeres en las que se les identifica datos, características y/o enfermedades significativas para incrementar el riesgo para contraer cáncer cervical. Entre ellos: la edad, el número de parejas sexuales, la edad de la primera relación sexual, número de embarazos, si fuma o no, el número de años fumando, el número de cajetillas consumidas por año, si consumen o no anticonceptivos, el número de años consumiendo anticonceptivos, si usan o no DIU, el número de años usando DIU, si tienen ETS o no, el número de ETS que tienen, si tienen o no los siguientes tipos de ETS (condilomatosis, condilomatosis cervical, condilomatosis vaginal, condilomatosis vulvo-perineal, sífilis, enfermedad inflamatoria pélvica, herpes, molusco contagioso, AIDs, VIH, hepatitis B, HPV, número de diagnósticos, tiempo desde el primer diagnóstico, tiempo del último diagnóstico), cáncer, CIN, HPV, Hinselmann, Schiller, citología, y biopsia.
+
+        Las columnas de la base de datos Hinselmann, Schiller, citología, y biopsia, son variables binarias que representan diferentes estudios que tratan de encontrar cáncer en el cuello utirino de las pacientes. Dada la documentación de la base de datos, no nos fue posible determinar cuál de estos 4 estudios es el más fiable para la determinación de la presencia de un cáncer, por lo que hemos optado por la creación de una nueva variable se define como la suma de los valores que toman los estudios en la base de datos, esto resulta en una variable con 5 posibles valores, un mínimo de 0 representando un riesgo nulo o bajo de tener cáncer, y un valor máximo de 4 representando el mayor riesgo de tenerlo.
+
+        El objetivo de nuestro proyecto es diseñar un modelo de \emph{Aprendizaje por Refuerzo} que agrupe de forma exitosa a los pacientes presentes en la base de datos.
+
+    \section{Créditos} \label{credits}
+       
+        \begin{itemize}
+            \item Juan Pablo Echeagaray González - Data Scientist
+            \item Emily Rebeca Méndez Cruz - Data Scientist
+            \item Grace Aviance Silva Aróstegui - Data Scientist
+        \end{itemize}
+
+    \section{Modelos de Aprendizaje por Refuerzo} \label{modelos}
+
+        \subsection{K-Means - Grace Aviance Silva Arostegui} \label{decision-tree}
+            
+        \subsection{Dendogramas - Emily Rebeca Méndez Cruz} \label{dendogram}
+
+        \subsection{DBSCAN - Juan Pablo Echeagaray González} \label{neural-network}
+
+            DBSCAN es otro algoritmo de agrupamiento no supervisado. De forma general, este algoritmo define \emph{clusters} como regiones continuas con alta densidad (es decir, que contengan muchas instancias).
+
+            \subsubsection{Algoritmo}
+
+                El libro \emph{Hands-on machine learning with Scikit-Learn, Keras, and TensorFlow: Concepts, tools, and techniques to build intelligent systems} brinda una excelente descripción de su funcionamiento en un nivel general, además de enseñar cómo utilizarlo en \emph{Python} \cite{geron2019hands}.
+
+                \begin{enumerate}
+                    \item Para cada instancia, determinar cuántas instancias más están lo suficientemente cerca de el (controlado por un parámetro $\epsilon$). La región obtenida se conoce como el \emph{vecindario-$\epsilon$}.
+                    \item Si el objeto tiene al menos un cierto número de instancias (\emph{min\_samples}) en su \emph{vecindario-$\epsilon$}, entonces se le considera como una instancia núcleo. Dicho de otra manera, estas instancias se ubican en las regiones densas.
+                    \item Todas las instancias que estén dentro de la región de una instancia núcleo pertenecen al mismo clúster. En este proceso se pueden llegar a incluir más instancias núcleo formando grandes cadenas que seguirán formando parte del mismo clúster.
+                    \item Al finalizar este proceso, cualquier instancia que no sea una instancia núcleo o que no esté dentro de un vecindario, será considerada como una anomalía.
+                \end{enumerate}
+            
+            \subsubsection{Objetivo}
+
+                Como objetivo, queremos encontrar un conjunto de agrupaciones que logre encapsular las posibles diferencias entre los pacientes. Como resultados esperaríamos ver que este algoritmo encuentre un cluster para cada uno de los niveles de riesgo de cáncer que definimos con anterioridad.
+
+            \subsubsection{Implementación}
+
+                Para nuestra implementación hemos usado la librería \emph{scikit-learn} \cite{scikit-learn}, a través de su API hemos entrenado varias instancias de un DBSCAN, en cada uno de ellos hemos variado el parámetro $\epsilon$ o (min\_distance). Para cada uno de los modelos hemos graficado su \emph{Silhouette Score}, el número de clusters que encuentran, y cuantas instancias pertenecen a cada cluster. Al final hemos escogido el modelo con un Silhouette Score aceptable que encuentra un número de clusters igual a los diferentes niveles de riesgo de tener cáncer que definimos en nuestra entrega anterior
+
+    \section{Resultados} \label{resultados}
+
+    \section{Conclusiones} \label{conclusiones}
+        
+        \subsection{Áreas de mejora} \label{improvements}
+
+        \subsection{Modelo seleccionado} \label{selected-model}
+
+    \section{Reflexiones} \label{thoughts}
+    
+        \subsection{Grace Aviance Silva Arostegui}
+        
+        \subsection{Emily Rebeca Méndez Cruz}
+        
+        \subsection{Juan Pablo Echeagaray González}
+
+                Los algoritmos de aprendizaje no supervisados son en verdad bastante interesantes. Me sorprendió mucho lo diferentes que pueden ser de los algoritmos discutidos con anterioridad. Una de las principales dificultades a las que me enfrenté fue decidir como medir el desempeño de cada uno de los modelos; descartando el tiempo de entrenamiento, creo que es muy complicado que un científico de datos por sí solo pueda medir qué tan bien funciona un modelo aplicado a un área tan compleja y crítica como lo es la medicina.
+        
+    \appendices
+    
+    \section{Datos} \label{data}
+
+        Base de datos consistente de 36 características y de 858 observaciones. Está compuesta principalmente de variables categóricas que indican si alguna enfermedad o afección se encontró presente en el individuo. Consta de pocas variables numéricas como lo son la edad, el número de embarazos y de parejas sexuales, la edad en la que se tuvo la primera relación sexual y el número de años que ha fumado.
+
+        Los datos usados en este proyecto pueden descargarse \href{https://www.kaggle.com/code/ravaliraj/risk-classification-of-cervical-cancer}{aquí}.
+
+    \section{Código} \label{code}
+
+        El código desarrollado se encuentra en el siguiente \href{https://github.com/JuanEcheagaray75/cancer-clf}{repositorio}
+
+    \section{Evidencias de trabajo en equipo}
+
+
+    \bibliographystyle{IEEEtran}
+    \bibliography{references.bib}
+
+\end{document}
